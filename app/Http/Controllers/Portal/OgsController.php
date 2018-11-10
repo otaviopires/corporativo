@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Portal;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\og;
+use App\Models\Og;
 
 
 
@@ -24,7 +24,7 @@ class OgsController extends Controller
     {	
 		//$this->store();
 		return $this->showLiveJson();
-		//return $this->closeSavedOg();
+		//return $this->showOpenOgs();
     }
 
     /**
@@ -45,30 +45,38 @@ class OgsController extends Controller
      */
     public function store()
     {	
-		$ogs = $this->getpfsFromUrl();
+		$ogs = $this->getOgsFromUrl();
 		foreach($ogs as $og) {		
 			if(Og::where('protocolo',  $og['PROTOCOLO'])->first()['protocolo'] == $og['PROTOCOLO']){
+				Og::where('protocolo',  $og['PROTOCOLO'])->update(['obs' => $og['OBS']]);
+				error_log("[UPDATE] - Observações do protocolo " . Og::where('protocolo',  $og['PROTOCOLO'])->first()['protocolo'] . " atualizadas.");
 				continue;
 			}else{
 				$ogToSave = new Og;
 				$ogToSave->protocolo = $og['PROTOCOLO'];
 				$ogToSave->fila = $og['FILA'];
-				$ogToSave->circuito = $og['CIRCUITO'];
 				$ogToSave->status = $og['STATUS'];
-				$ogToSave->entrada_fila = $og['ENTRADA_FILA'];
-				$ogToSave->vencimento_anatel = $og['VENCIMENTO_ANATEL'];
 				$ogToSave->data_abertura = $og['DT_ABERTURA'];
-				$ogToSave->produto = $og['PRODUTO'];
 				$ogToSave->servico = $og['SERVICO'];
 				$ogToSave->regional = $og['REGIONAL'];
 				$ogToSave->localidade = $og['LOCALIDADE'];
-				$ogToSave->tecnico = $og['TECNICO'];
-				$ogToSave->desc = $og['DESC_EQPTO'];
+				$ogToSave->descricao = $og['DESCRICAO'];
+				
+				if($og['INTERROMPEU'] == "Y"){
+					$ogToSave->interrompeu = "Sim";
+				}elseif($og['INTERROMPEU'] == "N"){
+					$ogToSave->interrompeu = "Não";
+				}else{
+				$ogToSave->interrompeu = "Não informado";
+				}
+				
+				$ogToSave->qtd_clientes = $og['QNT_CLIENTE'];
+				$ogToSave->obs = $og['OBS'];
 				$ogToSave->save();
-				error_log("[NEW] - Pesquisa de falha " . Og::where('protocolo',  $og['PROTOCOLO'])->first()['protocolo'] . " salvo com sucesso!");
+				error_log("[NEW] - Protocolo " . Og::where('protocolo',  $og['PROTOCOLO'])->first()['protocolo'] . " salvo com sucesso!");
 			}
 		}
-		$this->closeSavedOgs();
+		$this->closeClosedOgs();
 	}
 	
 
@@ -92,7 +100,7 @@ class OgsController extends Controller
      */
     public function edit(Og $og)
     {
-        // there's no editing of Pfs here
+        // there's no editing of OGs here
     }
 
     /**
@@ -104,7 +112,7 @@ class OgsController extends Controller
      */
     public function update(Request $request, Og $og)
     {
-        // we don't update saved Pfs, they're static
+        // we don't update saved OGs, they're static
     }
 
     /**
@@ -115,7 +123,7 @@ class OgsController extends Controller
      */
     public function destroy(Og $og)
     {
-        // we don't plan do delete save Pfs, they're meant to be a log
+        // we don't plan do delete save OGs, they're meant to be a log
     }
 	
 	public function showOpenOgs()
@@ -129,21 +137,21 @@ class OgsController extends Controller
 		return view('ogs.open')->with('ogs', $ogs);
 	}
 
-	public function showSavedOgs()
+	public function showClosedOgs()
     {
-        $ogs =  Og::orderBy('protocolo', 'desc')->paginate(20);
+        $ogs =  Og::orderBy('protocolo', 'desc')->paginate(15);
 		foreach($ogs as $i=>$og){
 			if($og['status'] == "ABERTO"){
 				$ogs->forget($i);
 			}
 		}
-		return view('ogs.list')->with('ogs', $ogs);
+		return view('ogs.closed')->with('ogs', $ogs);
 	}
     
     public function showLiveJson()
     {
 		$ogs = $this->getOgsFromUrl();
-		//dd($pfs);
+		//dd($ogs);
 		$ogs = collect($ogs)->sortBy('DT_ABERTURA')->reverse()->toArray();
 		return view('ogs.index')->with('ogs', $ogs);
     }
@@ -155,7 +163,6 @@ class OgsController extends Controller
 		$ogs = $ogs['result'];
 		return $ogs;
 		print $url;
-		
     }
 	
 	public function closeSavedOgs()

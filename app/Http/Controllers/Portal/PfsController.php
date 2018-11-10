@@ -149,6 +149,17 @@ class PfsController extends Controller
 	
 	public function getPfsFromUrl()
     {
+		/*
+		ID 1 - CSO ComutaçãO
+		ID 2 - CSO Dados
+		ID 3 - Indefinido
+		ID 4 - CSO Massiva
+		ID 5 - Reincidência Comutação
+		ID 6 - Reincidência Dados
+		ID 7 - Reincidência Transmissão
+		ID 8 - COR Rede Comutação e Celular
+		*/
+
         $url = 'http://portaldesempenho.algartelecom.com.br/api/filas?email=rodrigosv@algartelecom.com.br&password=bXVkYXIxMjM=&id=6';
 		$urll = 'http://portaldesempenho.algartelecom.com.br/api/filas?email=rodrigosv@algartelecom.com.br&password=bXVkYXIxMjM=&id=5';
 		$urlll ='http://portaldesempenho.algartelecom.com.br/api/filas?email=rodrigosv@algartelecom.com.br&password=bXVkYXIxMjM=&id=7';
