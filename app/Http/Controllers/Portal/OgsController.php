@@ -48,35 +48,40 @@ class OgsController extends Controller
 		$ogs = $this->getOgsFromUrl();
 		foreach($ogs as $og) {		
 			if(Og::where('protocolo',  $og['PROTOCOLO'])->first()['protocolo'] == $og['PROTOCOLO']){
-				Og::where('protocolo',  $og['PROTOCOLO'])->update(['obs' => $og['OBS']]);
+				Og::where('protocolo',  $og['PROTOCOLO'])->update(['descricao' => $og['DESC_EQPTO']]);
 				error_log("[UPDATE] - Observações do protocolo " . Og::where('protocolo',  $og['PROTOCOLO'])->first()['protocolo'] . " atualizadas.");
 				continue;
 			}else{
 				$ogToSave = new Og;
 				$ogToSave->protocolo = $og['PROTOCOLO'];
 				$ogToSave->fila = $og['FILA'];
+				$ogToSave->circuito = $og['CIRCUITO'];
 				$ogToSave->status = $og['STATUS'];
+				$ogToSave->entrada_fila = $og['ENTRADA_FILA'];
+				$ogToSave->vencimento_anatel = $og['VENCIMENTO_ANATEL'];
 				$ogToSave->data_abertura = $og['DT_ABERTURA'];
+				$ogToSave->produto = $og['PRODUTO'];
 				$ogToSave->servico = $og['SERVICO'];
 				$ogToSave->regional = $og['REGIONAL'];
 				$ogToSave->localidade = $og['LOCALIDADE'];
-				$ogToSave->descricao = $og['DESCRICAO'];
+				$ogToSave->tecnico = $og['TECNICO'];
+				$ogToSave->descricao = $og['DESC_EQPTO'];
 				
-				if($og['INTERROMPEU'] == "Y"){
-					$ogToSave->interrompeu = "Sim";
-				}elseif($og['INTERROMPEU'] == "N"){
-					$ogToSave->interrompeu = "Não";
-				}else{
-				$ogToSave->interrompeu = "Não informado";
-				}
+				// if($og['INTERROMPEU'] == "Y"){
+				// 	$ogToSave->interrompeu = "Sim";
+				// }elseif($og['INTERROMPEU'] == "N"){
+				// 	$ogToSave->interrompeu = "Não";
+				// }else{
+				// $ogToSave->interrompeu = "Não informado";
+				// }
 				
-				$ogToSave->qtd_clientes = $og['QNT_CLIENTE'];
-				$ogToSave->obs = $og['OBS'];
+				// $ogToSave->qtd_clientes = $og['QNT_CLIENTE'];
+				// $ogToSave->obs = $og['OBS'];
 				$ogToSave->save();
 				error_log("[NEW] - Protocolo " . Og::where('protocolo',  $og['PROTOCOLO'])->first()['protocolo'] . " salvo com sucesso!");
 			}
 		}
-		$this->closeClosedOgs();
+		$this->closeSavedOgs();
 	}
 	
 
@@ -171,11 +176,11 @@ class OgsController extends Controller
 		$savedOgs = Og::pluck('protocolo')->toArray();
 		foreach($savedOgs as $saved){
 			if(array_search($saved, array_column($liveOgs, 'PROTOCOLO'))){
-				error_log("[ABERTO] A pesquisa de falha: " . Og::where('protocolo',  $saved)->first()['protocolo'] . " ainda não foi encerrada. " . "Status atual: " .Og::where('protocolo',  $saved)->first()['status']);
+				error_log("[ABERTO] O chamado: " . Og::where('protocolo',  $saved)->first()['protocolo'] . " ainda não foi encerrado. " . "Status atual: " .Og::where('protocolo',  $saved)->first()['status']);
 			}elseif (Og::where('protocolo',  $saved)->first()['status'] == "FECHADO"){
-				error_log("[VERIFICADO] A pesquisa de falha " . Og::where('protocolo',  $saved)->first()['protocolo'] . " já está encerrada.");
+				error_log("[VERIFICADO] Chamado " . Og::where('protocolo',  $saved)->first()['protocolo'] . " já está encerrado.");
 			}else{
-				error_log("[ENCERRADO] Pesquisa de falha " . Og::where('protocolo',  $saved)->first()['protocolo'] . " não foi localizado nas Ogs ativas. Será encerrado.");
+				error_log("[ENCERRADO] Chamado " . Og::where('protocolo',  $saved)->first()['protocolo'] . " não foi localizado nas OGS ativas. Será encerrado.");
 				Og::where('protocolo',  $saved)->update(['status' => "FECHADO"]);
 				error_log("[UPDATE] Novo status: " .Og::where('protocolo',  $saved)->first()['status']);
 			}		

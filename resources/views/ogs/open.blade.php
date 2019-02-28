@@ -25,9 +25,9 @@
 		</thead>
 	@foreach ($ogs as $og)
 		<tbody>
-	        <tr data-toggle="collapse" data-target="#demo{{$og['protocolo']}}" class="accordion-toggle" style="background-color:lightyellow; text-align:center">
-			  <th scope="row">{{ $og['protocolo'] }}</th>
-			  <td>{{ $og['fila'] }}</td>
+	        <tr data-toggle="collapse" data-target="#demo{{$og['protocolo']}}" class="accordion-toggle" style=" border-top: none; background-color:lightyellow; text-align:center">
+			  <th style="border-top: none" scope="row">{{ $og['protocolo'] }}</th>
+			  <td style="border-top: none">{{ $og['DESC_EQPTO'] }} I'm here!</td>
 			  <td>{{ $og['status'] }}</td>
 			  <td>{{ $og['data_abertura'] }}</td>
 			  <td>{{ $og['servico'] }}</td>

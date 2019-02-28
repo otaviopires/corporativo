@@ -117,9 +117,9 @@ return [
             'text' => 'Avaliação',
             'icon' => 'book',
             'url' => '#',
-            'can' => 'analista'
-        ],*/
-       /** [
+            'can' => 'admin'
+        ],
+       /**[
             'text'    => 'Dash FCR',
             'icon'    => 'bomb',
             'submenu' => [
@@ -135,9 +135,10 @@ return [
                     'text'    => 'Service Desk',
                     'url'     => '#',
                 ]
-            ],   
+            ],
+				'can' => 'admin'
             ],*/
-       /** [
+		/**[
             'text'    => 'Dash OS\'s',
             'icon'    => 'bomb',
             'submenu' => [
@@ -162,7 +163,8 @@ return [
                     'url'     => '#',
                 ]               
             ],
-        ], */
+			'can' => 'admin'
+		], */
 		
 		[
             'text' => 'Escalas de Plantões',
@@ -180,9 +182,7 @@ return [
             'text' => 'FAQ\'s',
             'icon' => 'book',
             'url' => '/faq',
-            'can' => 'noc',
-			'can' => 'prm',
-			'can' => 'soc'
+
         ],
 
        /** [
@@ -207,7 +207,7 @@ return [
         [
             'text' => 'Link\'s Utéis',
             'icon' => 'angellist',
-            'url' => '#',
+            'url' => '/links',
         ],
         [
             'text'    => 'OG\'s',
@@ -219,7 +219,7 @@ return [
                 ],
                 [
                     'text'    => 'Fechadas',
-                    'url'     => '#',
+                    'url'     => '/ogs/closed',
 					
                 ]
             ],
@@ -234,7 +234,7 @@ return [
                 ],
                 [
                     'text'    => 'Fechadas',
-                    'url'     => '#',
+                    'url'     => '/pfs/list',
                 ]
             ],
         ],

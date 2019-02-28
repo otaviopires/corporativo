@@ -26,6 +26,7 @@ Route::group(['namespace' => 'Portal',  'middleware' => 'auth'], function () {
 	Route::get('events', 'EventController@index')->name('events.index');
     Route::get('/home', 'PortalController@index')->name('home');
 	Route::get('ogs/closed', 'OgsController@showClosedOgs');
+	Route::get('pfs/list', 'PfsController@showClosedPfs');
 	
 	Route::post('events', 'EventController@addEvent')->name('events.add');
 	
@@ -35,7 +36,8 @@ Route::group(['namespace' => 'Portal',  'middleware' => 'auth'], function () {
 	Route::resources([
 		'ogs' => 'OgsController',
 		'pfs' => 'PfsController',
-		'tel' => 'TelController'
+		'tel' => 'TelController',
+		'links' => 'UsefulLinksController'
 	]);
 
 });

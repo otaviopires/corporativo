@@ -3,9 +3,10 @@
 @section('title', 'Portal Corporativo')
 
 @section('content_header')
-    <h1>Dashboard</h1>
+    <h1>Bem vindo ao Portal CRE</h1>
+
 @stop
 
 @section('content')
-    <p>You are logged in!</p>
+    <p>Você esta logado!</p>
 @stop

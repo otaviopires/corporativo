@@ -43,6 +43,18 @@ class PfsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+	 
+	 	public function showClosedPfs()
+    {
+        $pfs =  Pf::orderBy('protocolo', 'desc')->paginate(15);
+		foreach($pfs as $i=>$pf){
+			if($pf['status'] == "ABERTO"){
+				$pfs->forget($i);
+			}
+		}
+		return view('pfs.list')->with('pfs', $pfs);
+	}
+    
     public function store()
     {	
 		$pfs = $this->getpfsFromUrl();
@@ -63,6 +75,7 @@ class PfsController extends Controller
 				$pfToSave->regional = $pf['REGIONAL'];
 				$pfToSave->localidade = $pf['LOCALIDADE'];
 				$pfToSave->tecnico = $pf['TECNICO'];
+				$pfToSave->descricao = $pf['DESC_EQPTO'];
 				$pfToSave->save();
 				error_log("[NEW] - Pesquisa de falha " . Pf::where('protocolo',  $pf['PROTOCOLO'])->first()['protocolo'] . " salvo com sucesso!");
 			}

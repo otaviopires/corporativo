@@ -27,6 +27,7 @@ class CreatePfsTable extends Migration
 			$table->string('regional')->nullable();
 			$table->string('localidade')->nullable();
 			$table->string('tecnico')->nullable();
+			$table->string('descricao')->nullable();
         });
     }
 

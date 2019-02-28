@@ -7,22 +7,24 @@
 		<thead>
 			<tr style="background-color:lightgreen;" align="center">
 				<th scope="col" style="vertical-align:middle"><center>Protocolo</th>
-				<th scope="col" style="vertical-align:middle"><center>Fila</th>
+				<th scope="col" style="vertical-align:middle"><center>Ocorrência</th>
 				<th scope="col" style="vertical-align:middle"><center>Status</th>
 				<th scope="col" style="vertical-align:middle"><center>Data de abertura</th>
-				<th scope="col" style="vertical-align:middle"><center>Regional</th>
+				<th scope="col" style="vertical-align:middle"><center>Serviço</th>
 				<th scope="col" style="vertical-align:middle"><center>Localidade</th>
+				<th scope="col" style="vertical-align:middle"><center>Regional</th>
 			</tr>
 		</thead>
 	@foreach ($pfs as $pf)
 		<tbody>
 	        <tr class="accordion-toggler" data-toggle="collapse" data-target="#demo{{$pf['PROTOCOLO']}}" style="background-color:lightyellow; text-align:center">
 			  <th scope="row"><center>{{ $pf['PROTOCOLO'] }}</th>
-			  <td><center>{{ $pf['FILA'] }}</td>
+			  <td><center>{{ $pf['DESC_EQPTO'] }}</td>
 			  <td><center>{{ $pf['STATUS'] }}</td>
 			  <td><center>{{ $pf['ENTRADA_FILA'] }}</td>
-			  <td><center>{{ $pf['REGIONAL'] }}</td>
+			  <td><center>{{ $pf['SERVICO'] }}</td>
 			  <td><center>{{ $pf['LOCALIDADE'] }}</td>
+			  <td><center>{{ $pf['REGIONAL'] }}</td>
 			
 			</tr> 
 			<tr>
@@ -42,8 +44,8 @@
 								<td class="border-0 pull-left" width="30%" style="text-align:right;">{{$pf['DT_ABERTURA']}} <br></td>
 							</tr>
 							<tr>
-								<td class="border-0" width="20%"><strong>Serviço:</strong></td>
-								<td class="border-0 pull-left" width="30%" style="text-align:right;">{{$pf['SERVICO']}} <br></td>
+								<td class="border-0" width="20%"><strong>Fila:</strong></td>
+								<td class="border-0 pull-left" width="30%" style="text-align:right;">{{$pf['FILA']}} <br></td>
 							</tr>
 						</table>
 					</div> 
@@ -52,4 +54,5 @@
 		</tbody>
 	@endforeach
 	</table>
+	<META HTTP-EQUIV=Refresh CONTENT="100; URL=http://10.13.65.95/pfs">
 @endsection

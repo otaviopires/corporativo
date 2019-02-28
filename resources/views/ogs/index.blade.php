@@ -21,7 +21,7 @@
 		<tbody>
 	          <tr class="accordion-toggler" data-toggle="collapse" data-target="#demo{{$og['PROTOCOLO']}}" style="background-color:lightyellow; text-align:center">
 			  <th scope="row"><center>{{ $og['PROTOCOLO'] }}</th>
-			  <td><center>{{ $og['DESC_EQPTO'] }}</td>
+			  <td style="border-top: none"><center>{{ $og['DESC_EQPTO'] }}</td>
 			  <td><center>{{ $og['STATUS'] }}</td>
 			  <td><center>{{ $og['ENTRADA_FILA'] }}</td>
 			  <td><center>{{ $og['SERVICO'] }}</td>
@@ -32,22 +32,22 @@
 			<tr>
 				<td colspan="7" style="background-color:lightblue; color: #000000;">
 					<div  id="demo{{$og['PROTOCOLO']}}" class="accordian-collapse collapse mx-4">	
-						<table class="table border-0" style="background-color:rgba(0, 0, 0, 0);">
+						<table class="table" style="background-color:rgba(0, 0, 0, 0);">
 							<tr>
-								<td class="border-0" width="20%"><strong>Técnico:</strong></td>
-								<td class="border-0 pull-left" width="30%" style="text-align:right;">{{$og['TECNICO']}} <br></td>
+								<td class="" width="20%"style="border-top: none"><strong>Técnico:</strong></td>
+								<td class="border-0 pull-left" width="30%" style="text-align:right;border-top: none">{{$og['TECNICO']}} <br></td>
 							</tr>
 							<tr>
-								<td class="border-0" width="20%"><strong>Vencimento Anatel:</strong></td>
-								<td class="border-0 pull-left" width="30%" style="text-align:right;">{{$og['VENCIMENTO_ANATEL']}} <br></td>
+								<td class="border-0" width="20%"style="border-top: none"><strong>Vencimento Anatel:</strong></td>
+								<td class="border-0 pull-left" width="30%" style="text-align:right;border-top: none">{{$og['VENCIMENTO_ANATEL']}} <br></td>
 							</tr>
 							<tr>
-								<td class="border-0" width="20%"><strong>Data de abertura:</strong></td>
-								<td class="border-0 pull-left" width="30%" style="text-align:right;">{{$og['DT_ABERTURA']}} <br></td>
+								<td class="border-0" width="20%"style="border-top: none"><strong>Data de abertura:</strong></td>
+								<td class="border-0 pull-left" width="30%" style="text-align:right;border-top: none">{{$og['DT_ABERTURA']}} <br></td>
 							</tr>
 							<tr>
-								<td class="border-0" width="20%"><strong>Fila:</strong></td>
-								<td class="border-0 pull-left" width="30%" style="text-align:right;">{{$og['FILA']}} <br></td>
+								<td class="border-0" width="20%"style="border-top: none"><strong>Fila:</strong></td>
+								<td class="border-0 pull-left" width="30%" style="text-align:right;border-top: none">{{$og['FILA']}} <br></td>
 							</tr>
 						</table>
 					</div> 
@@ -56,4 +56,5 @@
 		</tbody>
 	@endforeach
 	</table>
+	<META HTTP-EQUIV=Refresh CONTENT="100; URL=http://10.13.65.95/ogs">
 @endsection

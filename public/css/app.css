@@ -338,3 +338,7 @@
     -moz-border-radius: 24px;
     border-radius: 24px;
   }
+
+  td {
+    border-top: none!important;  
+  }

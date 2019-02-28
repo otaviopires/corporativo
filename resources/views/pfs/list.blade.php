@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('adminlte::page')
 
 @section('content')
 	<h1 align="center">Histórico de PFs</h1>
@@ -21,23 +21,25 @@
 	<table class="table table-hover table-bordered">
 		<thead>
 			<tr style="background-color:lightgreen;" align="center">
-				<th scope="col" style="vertical-align:middle">Protocolo</th>
-				<th scope="col" style="vertical-align:middle">Fila</th>
-				<th scope="col" style="vertical-align:middle">Status</th>
-				<th scope="col" style="vertical-align:middle">Data de abertura</th>
-				<th scope="col" style="vertical-align:middle">Regional</th>
-				<th scope="col" style="vertical-align:middle">Localidade</th>
+				<th scope="col" style="vertical-align:middle"><center>Protocolo</th>
+				<th scope="col" style="vertical-align:middle"><center>Ocorrência</th>
+				<th scope="col" style="vertical-align:middle"><center>Status</th>
+				<th scope="col" style="vertical-align:middle"><center>Data de abertura</th>
+				<th scope="col" style="vertical-align:middle"><center>Serviço</th>
+				<th scope="col" style="vertical-align:middle"><center>Localidade</th>
+				<th scope="col" style="vertical-align:middle"><center>Regional</th>
 			</tr>
 		</thead>
 	@foreach ($pfs as $i=>$pf)
 		<tbody>
 	        <tr class="accordion-toggler" data-toggle="collapse" data-target="#demo{{$pf['protocolo']}}" style="background-color:lightyellow; text-align:center">
 			  <th scope="row">{{ $pf['protocolo'] }}</th>
-			  <td>{{ $pf['fila'] }}</td>
+			  <td>{{ $pf['descricao'] }}</td>
 			  <td>{{ $pf['status'] }}</td>
 			  <td>{{ $pf['data_abertura'] }}</td>
-			  <td>{{ $pf['regional'] }}</td>
-			  <td>{{ $pf['localidade'] }}</td>	
+			  <td>{{ $pf['fila'] }}</td>
+			  <td>{{ $pf['localidade'] }}</td>
+			  <td>{{ $pf['regional'] }}</td>	
 			</tr> 
 			<tr>
 				<td colspan="10" style="background-color:lightblue; color: #000000;">
@@ -53,7 +55,7 @@
 							</tr>
 							<tr>
 								<td class="border-0" width="20%"><strong>Data de abertura:</strong></td>
-								<td class="border-0 pull-left" width="30%" style="text-align:right;">{{$pf['dt_abertura']}} <br></td>
+								<td class="border-0 pull-left" width="30%" style="text-align:right;">{{$pf['data_abertura']}} <br></td>
 							</tr>
 							<tr>
 								<td class="border-0" width="20%"><strong>Serviço:</strong></td>
@@ -66,5 +68,6 @@
 		</tbody>
 	@endforeach
 	</table>
-    {{$pfs->links()}}	
+    {{$pfs->links()}}
+<META HTTP-EQUIV=Refresh CONTENT="100; URL=http://10.13.65.95/pfs/list">	
 @endsection
