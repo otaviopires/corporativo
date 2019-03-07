@@ -23,7 +23,7 @@ class PfsController extends Controller
     public function index()
     {	
 		//$this->store();
-		return $this->showLiveJson();
+		return $this->showOpenPfs();
 		//return $this->closeSavedOg();
     }
 
@@ -199,31 +199,4 @@ class PfsController extends Controller
 			}		
 		}
 	}
-	public function findPf(Request $request)
-	{
-		if (!$request) {
-			$pfs = Pf::all();
-		} else {
-			$pfs = Pf::where('protocolo', 'LIKE', $request)
-				->paginate(10);
-		}
-		
-		return view('pfs.list')->with('pfs', $pfs);
-	}
-	
-	public function search(Request $request)
-	{
-		$protocolo = $request->input('protocolo');
-
-		//now get all user and services in one go without looping using eager loading
-		//In your foreach() loop, if you have 1000 users you will make 1000 queries
-
-		$pfs = Pf::with('protocolo', 
-			function($query) use ($protocolo) {
-				$query->where('protocolo', 'LIKE', '%' . $protocolo . '%');
-			})->paginate(10);
-
-		return view('pfs.list', compact('pfs'));
-	}
-	
 }

@@ -188,6 +188,7 @@ class OgsController extends Controller
 	}
 	public function findOg(Request $request)
 	{
+
 		if (!$request) {
 			$ogs = Og::all();
 		} else {
@@ -200,17 +201,25 @@ class OgsController extends Controller
 	
 	public function search(Request $request)
 	{
-		$protocolo = $request->input('protocolo');
+		// $protocolo = $request->input('protocolo');
 
 		//now get all user and services in one go without looping using eager loading
 		//In your foreach() loop, if you have 1000 users you will make 1000 queries
 
-		$ogs = Og::with('protocolo', 
-			function($query) use ($protocolo) {
-				$query->where('protocolo', 'LIKE', '%' . $protocolo . '%');
-			})->paginate(10);
+		// $ogs = Og::with('protocolo', 
+		// 	function($query) use ($protocolo) {
+		// 		$query->where('protocolo', 'LIKE', '%' . $protocolo . '%');
+		// 	})->get();
+		// print $ogs;
 
-		return view('ogs.list', compact('ogs'));
+		$query = Request::input('search');
+
+		$ogs = DB::table('ogs')->where('protocolo', 'LIKE', '%' . $query . '%')->paginate(10);
+
+
+		Log::debug('ENTROU NA FUNCAO SEARCH');
+
+		return view('ogs.closed', compact('ogs', $ogs));
 	}
 	
 }

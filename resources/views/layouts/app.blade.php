@@ -22,14 +22,14 @@
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="/css/util.css">
     <link rel="stylesheet" type="text/css" href="/css/main.css">
-    <link rel="stylesheet" type="text/css" href="/css/app.css">
-    <link rel="stylesheet" type="text/css" href="/scss/app.css">
+    <link rel="stylesheet" type="text/css" href="/css/app.css"> 
+    <link rel="stylesheet" type="text/css" href="/scss/app.css"> 
 <!--===============================================================================================-->
 
 	<!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="/assets/css/normalize.css">
-    <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="/assets/css/font-awesome.min.css">
     <link rel="stylesheet" href="/assets/css/themify-icons.css">
     <link rel="stylesheet" href="/assets/css/flag-icon.min.css">
@@ -124,6 +124,7 @@
     <script src="/assets/js/lib/vector-map/jquery.vmap.min.js"></script>
     <script src="/assets/js/lib/vector-map/jquery.vmap.sampledata.js"></script>
     <script src="/assets/js/lib/vector-map/country/jquery.vmap.world.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <script>
         ( function ( $ ) {
             "use strict";

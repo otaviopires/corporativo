@@ -3,21 +3,22 @@
 @section('content')
 	<h1 align="center">Histórico de OGs Encerradas</h1>
 	
-	{!! Form::open(['method'=>'GET','ogs'=>'/find','role'=>'search'])  !!}
-	<div class="input-group custom-search-form">
-		<input type="text" class="form-control" name="search" placeholder="Procurar...">
-        <span class="input-group-btn">
-			<button class="btn btn-default-sm" type="submit">
-				<a class="fa fa-search">Procurar</a>
-			</button>
-		</span>
-	</div>
-	
-	<!-- <form action="/search" method="GET"> -->
-		<!-- <input type="text" name="category" required/> -->
-		<!-- <button type="submit">Submit</button> -->
-	<!-- </form> -->
-	
+
+	<form action="/ogs/closed/find" method="POST" role="search">
+		{{ csrf_field() }}
+		<div class="input-group">
+			<input type="text" class="form-control" name="q"
+				placeholder="Pequise..."> <span class="input-group-btn">
+				<button type="submit" class="btn btn-default">
+					<span class="glyphicon glyphicon-search"></span>
+				</button>
+			</span>
+		</div>
+	</form>
+
+
+
+
 	<table class="table table-hover table-bordered">
 		<thead>
 			<tr style="background-color:lightgreen;" align="center">
@@ -82,5 +83,5 @@
 	@endforeach
 	</table>
     {{$ogs->links()}}	
-	<META HTTP-EQUIV=Refresh CONTENT="100; URL=http://10.13.65.95/ogs/closed">
+	{{-- <META HTTP-EQUIV=Refresh CONTENT="100; URL=http://10.13.65.95/ogs/closed"> --}}
 @endsection

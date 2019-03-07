@@ -1,6 +1,10 @@
-@extends('layouts.app')
+@extends('adminlte::page')
 
-@section('title', 'Portal Corporativo - PFs')
+@section('content')
+
+{{-- @extends('layouts.app') --}}
+
+{{-- @section('title', 'Portal Corporativo - PFs') --}}
 
 @section('content')
 	<h1 align="center">PFs Abertas</h1>
@@ -9,11 +13,12 @@
 		<thead>
 			<tr style="background-color:lightgreen;" align="center">
 				<th scope="col" style="vertical-align:middle"><center>Protocolo</th>
-				<th scope="col" style="vertical-align:middle"><center>Fila</th>
+				<th scope="col" style="vertical-align:middle"><center>Ocorrência</th>
 				<th scope="col" style="vertical-align:middle"><center>Status</th>
 				<th scope="col" style="vertical-align:middle"><center>Data de abertura</th>
-				<th scope="col" style="vertical-align:middle"><center>Regional</th>
+				<th scope="col" style="vertical-align:middle"><center>Serviço</th>
 				<th scope="col" style="vertical-align:middle"><center>Localidade</th>
+				<th scope="col" style="vertical-align:middle"><center>Regional</th>
 			</tr>
 		</thead>
 	@foreach ($pfs as $i=>$pf)

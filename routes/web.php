@@ -20,25 +20,45 @@ Route::group(['namespace' => 'Admin', 'middleware' => 'can:adm'], function () {
 
 
 Route::group(['namespace' => 'Portal',  'middleware' => 'auth'], function () {
-    
-	Route::redirect('/', '/home', 301);
 	
-	Route::get('events', 'EventController@index')->name('events.index');
-    Route::get('/home', 'PortalController@index')->name('home');
+	//PORTAL
+	Route::redirect('/', '/home', 301);
+	Route::get('/home', 'PortalController@index')->name('home');
+	
+
+	//OGS
 	Route::get('ogs/closed', 'OgsController@showClosedOgs');
+	
+	//PFS
 	Route::get('pfs/list', 'PfsController@showClosedPfs');
 	
+
+	//SEARCH
+	Route::post('ogs/closed/find', 'SearchController@searchOg');
+	Route::post('/pfs/list/find', 'SearchController@searchPf');
+	Route::post('/links/find', 'SearchController@searchLink');
+	
+	
+	
+	//EVENTS
+	Route::get('events', 'EventController@index')->name('events.index');
 	Route::post('events', 'EventController@addEvent')->name('events.add');
 	
+	//FAC
 	Route::resource('/faq', 'FaqController')->except(['show','edit','update']);
+	
+	//FORUM
 	Route::resource('/forum', 'ForumController')->except(['show','edit','update']);
 	
+
+	//ROTAS COMPLETAS PARA OS CONTROLLERS
 	Route::resources([
 		'ogs' => 'OgsController',
 		'pfs' => 'PfsController',
 		'tel' => 'TelController',
 		'links' => 'UsefulLinksController'
 	]);
+
 
 });
 
