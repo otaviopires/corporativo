@@ -22,9 +22,8 @@ class PfsController extends Controller
      */
     public function index()
     {	
-		//$this->store();
-		return $this->showOpenPfs();
-		//return $this->closeSavedOg();
+		//return $this->showOpenPfs();
+		return $this->showLiveJson();
     }
 
     /**

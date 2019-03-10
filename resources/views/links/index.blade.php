@@ -34,21 +34,22 @@
 		<div class="card">
 			<div class="card-header">
 				<a data-toggle="collapse" href="#{{$link->id}}">
-					<div class="col-md-11 col-sm-11">
+					<div class="col-md-11">
 						{{$link->name}}
 					</div>
 				</a>
 			
 				<a href="{{$link->url}}" target="_blank">
-					<div class="col-md-1 col-sm-1">
-						<i class="fa fa-external-link pull-right"></i>
+					<div class="col-md-1">
+						<i class="fa fa-external-link"></i>
 					</div>
 				</a>
 			</div>
 			
 			<div id="{{$link->id}}" class="card-collapse collapse">
 				<div class="card-body">
-					{{$link->description}}
+					<a href="{{$link->url}}" target="_blank">{{$link->url}}&nbsp;&nbsp;<i class="fa fa-external-link"></i></a>
+					
 				</div>
 			</div>
 		</div>

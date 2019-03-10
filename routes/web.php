@@ -23,7 +23,7 @@ Route::group(['namespace' => 'Portal',  'middleware' => 'auth'], function () {
 	
 	//PORTAL
 	Route::redirect('/', '/home', 301);
-	Route::get('/home', 'PortalController@index')->name('home');
+	Route::get('/home', 'OgsController@retunOpenOgsToHomeChart')->name('home');
 	
 
 	//OGS
@@ -35,6 +35,7 @@ Route::group(['namespace' => 'Portal',  'middleware' => 'auth'], function () {
 
 	//SEARCH
 	Route::post('ogs/closed/find', 'SearchController@searchOg');
+	Route::get('ogs/closed/find', 'SearchController@searchOg');
 	Route::post('/pfs/list/find', 'SearchController@searchPf');
 	Route::post('/links/find', 'SearchController@searchLink');
 	

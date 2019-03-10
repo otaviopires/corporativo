@@ -25,7 +25,8 @@ class SearchController extends Controller
         ->orWhere('regional','LIKE','%'.$q.'%')
         ->orWhere('descricao','LIKE','%'.$q.'%')
         ->orWhere('data_abertura','LIKE','%'.$q.'%')
-        ->paginate(10);
+        ->orderBy('protocolo', 'desc')
+        ->paginate(50);
         
 		return view('ogs.closed')->with('ogs', $ogs);
 
@@ -41,6 +42,7 @@ class SearchController extends Controller
         ->orWhere('descricao','LIKE','%'.$q.'%')
         ->orWhere('data_abertura','LIKE','%'.$q.'%')
         ->orWhere('fila','LIKE','%'.$q.'%')
+        ->orderBy('protocolo', 'desc')
         ->paginate(10);
         
 		return view('pfs.list')->with('pfs', $pfs);

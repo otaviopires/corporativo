@@ -142,6 +142,47 @@ class OgsController extends Controller
 		return view('ogs.open')->with('ogs', $ogs);
 	}
 
+
+	public function retunOpenOgsToHomeChart()
+    {
+		$regionais = [];
+        
+		$ogs = $this->getOgsFromUrl();
+
+		// $ogsUnique = $ogs->unique($ogs["REGIONAL"]);
+		// $ogsDupes = $ogs->diff($ogsUnique);
+
+		// dd($ogs, $ogsUnique, $ogsDupes);
+
+
+		// foreach($ogs as $i=>$og){
+		// 	$regions['regional'] = $og['REGIONAL'];
+		// }
+		// dd($regions);
+
+		// $regionsUnique = $regions->unique(['regional']);
+		// $regionsDupes = $regions->diff($regionsUnique);
+
+		// dd($regions, $regionsUnique, $regionsDupes);
+
+
+		foreach($ogs as $i=>$og){
+			
+			$regionais[$i] = array("regional"=>$og['REGIONAL'], "qtd"=>1);
+			$teste[$i] = $og['REGIONAL'];
+		}
+
+		$tmp = array_count_values($teste);
+		
+		
+		//dd($teste, $tmp);
+
+
+
+		return view('home')->with('ogs', $tmp);
+	}
+
+
 	public function showClosedOgs()
     {
         $ogs =  Og::orderBy('protocolo', 'desc')->paginate(15);
@@ -186,40 +227,7 @@ class OgsController extends Controller
 			}		
 		}
 	}
-	public function findOg(Request $request)
-	{
-
-		if (!$request) {
-			$ogs = Og::all();
-		} else {
-			$ogs = Og::where('protocolo', 'LIKE', $request)
-				->paginate(10);
-		}
-		
-		return view('ogs.list')->with('ogs', $ogs);
-	}
 	
-	public function search(Request $request)
-	{
-		// $protocolo = $request->input('protocolo');
 
-		//now get all user and services in one go without looping using eager loading
-		//In your foreach() loop, if you have 1000 users you will make 1000 queries
-
-		// $ogs = Og::with('protocolo', 
-		// 	function($query) use ($protocolo) {
-		// 		$query->where('protocolo', 'LIKE', '%' . $protocolo . '%');
-		// 	})->get();
-		// print $ogs;
-
-		$query = Request::input('search');
-
-		$ogs = DB::table('ogs')->where('protocolo', 'LIKE', '%' . $query . '%')->paginate(10);
-
-
-		Log::debug('ENTROU NA FUNCAO SEARCH');
-
-		return view('ogs.closed', compact('ogs', $ogs));
-	}
 	
 }
