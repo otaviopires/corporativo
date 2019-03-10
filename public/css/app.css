@@ -343,4 +343,14 @@
     border-top: none!important;  
   }
 
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    grid-template-rows: repeat(100, 300px);
+  }
 
+  .item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }

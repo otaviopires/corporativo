@@ -1,3 +1,5 @@
+
+
 @extends('adminlte::page')
 
 @section('title', 'Portal Corporativo')
@@ -8,55 +10,58 @@
 @stop
 
 @section('content')
-    {{-- {{print_r($ogs)}} --}}
-    {{-- @json($ogs); --}}
-
-    {{-- @foreach ($ogs as $i=>$og)
-        <span>{{$og[$i][$i]}}<span>
-        <span>{{$og[$i][$i+1]}}<span>
-    @endforeach --}}
-    {{-- @foreach ($ogs as $og)
-      ['{{ $og }}', 1],
-    @endforeach --}}
-    
-    {{-- @foreach($ogs as $i => $og)
-      {{$og["regional"]}}
-      @foreach( $og as $regional)
-        {{print_r($regional)}}
-      @endforeach
-    
-    @endforeach --}}
+    {{-- {{ \App\Http\Controllers\OgsController::retunClosedOgsToHomeChart() }} --}}
 
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
       google.charts.load('current', {'packages':['corechart']});
-      google.charts.setOnLoadCallback(drawChart);
+      google.charts.setOnLoadCallback(drawChartOgsAbertas);
+      google.charts.setOnLoadCallback(drawChartOgsFechadas);
 
-      function drawChart() {
-
+      function drawChartOgsAbertas() {
         var data = google.visualization.arrayToDataTable([
             ['Regional', 'Quantidade'],
-            @foreach($ogs as $regional => $qtd)
+            @foreach($open as $regional => $qtd)
                 ['{{$regional}}', {{$qtd}}],
             @endforeach                
         ]);
 
         var options = {
-          title: 'OGs em aberto - POR REGIONAL',
+          title: '{{array_sum($open)}} OGs - Em Andamento - POR REGIONAL',
           backgroundColor: { 
-            width:600,
-            height:300,
             fill:'transparent',
-            is3D:true,
-          }
+          },
+          is3D:true,
         };
 
-        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
-
+        var chart = new google.visualization.PieChart(document.getElementById('ogs-abertas'));
         chart.draw(data, options);
       }
-    </script>
-  
-  <div id="piechart" style="width: 900px; height: 500px;"></div>
 
+      function drawChartOgsFechadas() {
+        var data = google.visualization.arrayToDataTable([
+            ['Regional', 'Quantidade'],
+            @foreach($closed as $regional => $qtd)
+                ['{{$regional}}', {{$qtd}}],
+            @endforeach                
+        ]);
+
+        var options = {
+          title: '{{array_sum($closed)}} OGs - Fechadas - POR REGIONAL',
+          backgroundColor: { 
+            fill:'transparent',
+          },
+          is3D:true,
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('ogs-fechadas'));
+        chart.draw(data, options);
+      }
+    </script>  
+  
+  <div class="grid"> 
+    <div class="item" id="ogs-abertas"></div>
+    <div class="item" id="ogs-fechadas"></div>
+  </div>
+  
 @stop

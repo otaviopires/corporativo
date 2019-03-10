@@ -5,8 +5,7 @@ namespace App\Http\Controllers\Portal;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Og;
-
-
+use View;
 
 class OgsController extends Controller
 {
@@ -142,47 +141,6 @@ class OgsController extends Controller
 		return view('ogs.open')->with('ogs', $ogs);
 	}
 
-
-	public function retunOpenOgsToHomeChart()
-    {
-		$regionais = [];
-        
-		$ogs = $this->getOgsFromUrl();
-
-		// $ogsUnique = $ogs->unique($ogs["REGIONAL"]);
-		// $ogsDupes = $ogs->diff($ogsUnique);
-
-		// dd($ogs, $ogsUnique, $ogsDupes);
-
-
-		// foreach($ogs as $i=>$og){
-		// 	$regions['regional'] = $og['REGIONAL'];
-		// }
-		// dd($regions);
-
-		// $regionsUnique = $regions->unique(['regional']);
-		// $regionsDupes = $regions->diff($regionsUnique);
-
-		// dd($regions, $regionsUnique, $regionsDupes);
-
-
-		foreach($ogs as $i=>$og){
-			
-			$regionais[$i] = array("regional"=>$og['REGIONAL'], "qtd"=>1);
-			$teste[$i] = $og['REGIONAL'];
-		}
-
-		$tmp = array_count_values($teste);
-		
-		
-		//dd($teste, $tmp);
-
-
-
-		return view('home')->with('ogs', $tmp);
-	}
-
-
 	public function showClosedOgs()
     {
         $ogs =  Og::orderBy('protocolo', 'desc')->paginate(15);
@@ -228,6 +186,41 @@ class OgsController extends Controller
 		}
 	}
 	
+	public function retunDataToHomeChart()
+    {
+		$open = $this->returnCountedOpenOgs();
+		$closed = $this->retunCountedClosedOgs();
 
-	
+		return view('home', compact('open', 'closed'));	
+	}
+
+	protected function returnCountedOpenOgs(){
+		$regionais = [];
+		$ogs = $this->getOgsFromUrl();
+
+		foreach($ogs as $i=>$og){
+			$regionais[$i] = $og['REGIONAL'];
+		}
+
+		return array_count_values($regionais);
+	}
+
+	protected function retunCountedClosedOgs()
+    {
+		$regionais = [];
+		$ogs =  Og::orderBy('protocolo', 'desc')->get();
+		foreach($ogs as $i=>$og){
+			if($og['status'] == "ABERTO"){
+				$ogs->forget($i);
+			}
+		}
+
+		foreach($ogs as $i=>$og){
+			$regionais[$i] = $og['regional'];
+		}
+
+		return array_count_values($regionais);
+	}
+
+
 }
