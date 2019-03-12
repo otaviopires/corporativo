@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Portal;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Og;
+use App\Models\Pf;
 use View;
 
 class OgsController extends Controller
@@ -190,8 +191,10 @@ class OgsController extends Controller
     {
 		$open = $this->returnCountedOpenOgs();
 		$closed = $this->retunCountedClosedOgs();
+		$openPfs = $this->returnCountedOpenPfs();
+		$closedPfs = $this->returnCountedClosedPfs();
 
-		return view('home', compact('open', 'closed'));	
+		return view('home', compact('open', 'closed', 'openPfs', 'closedPfs'));	
 	}
 
 	protected function returnCountedOpenOgs(){
@@ -222,5 +225,39 @@ class OgsController extends Controller
 		return array_count_values($regionais);
 	}
 
+	protected function returnCountedOpenPfs()
+    {
+		$regionais = [];
+		$pfs =  Pf::orderBy('protocolo', 'desc')->get();
+		foreach($pfs as $i=>$pf){
+			if($pf['status'] == "FECHADO"){
+				$pfs->forget($i);
+			}
+		}
+
+		foreach($pfs as $i=>$pf){
+			$regionais[$i] = $pf['regional'];
+		}
+
+		return array_count_values($regionais);
+	}	
+
+	
+	protected function returnCountedClosedPfs()
+    {
+		$regionais = [];
+		$pfs =  Pf::orderBy('protocolo', 'desc')->get();
+		foreach($pfs as $i=>$pf){
+			if($pf['status'] == "ABERTO"){
+				$pfs->forget($i);
+			}
+		}
+
+		foreach($pfs as $i=>$pf){
+			$regionais[$i] = $pf['regional'];
+		}
+
+		return array_count_values($regionais);
+	}	
 
 }

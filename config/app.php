@@ -213,6 +213,8 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'Calendar' => MaddHatter\LaravelFullcalendar\Facades\Calendar::class,
+        'GraphsHelper' => App\Http\Helpers\graphsHelper::class,
+
         
         // HTML & FORMS
         'Form' => Collective\Html\FormFacade::class,

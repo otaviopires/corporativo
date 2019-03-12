@@ -18,6 +18,7 @@ class PortalController extends Controller
      */
     public function index()
     {
+        // retunDataToHomeChart();
         return view('home');
     }
 

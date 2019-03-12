@@ -23,7 +23,9 @@ Route::group(['namespace' => 'Portal',  'middleware' => 'auth'], function () {
 	
 	//PORTAL
 	Route::redirect('/', '/home', 301);
+	// Route::get('/home', 'PortalController@index')->name('home');
 	Route::get('/home', 'OgsController@retunDataToHomeChart')->name('home');
+
 	
 
 	//OGS

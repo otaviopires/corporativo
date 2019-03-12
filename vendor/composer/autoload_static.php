@@ -31,6 +31,7 @@ class ComposerStaticInitddd774815002e3c245319695a06541b2
         '801c31d8ed748cfa537fa45402288c95' => __DIR__ . '/..' . '/psy/psysh/src/functions.php',
         '0d8253363903f0ac7b0978dcde4e28a0' => __DIR__ . '/..' . '/beyondcode/laravel-dump-server/helpers.php',
         'f18cc91337d49233e5754e93f3ed9ec3' => __DIR__ . '/..' . '/laravelcollective/html/src/helpers.php',
+        '8495dbc155582dc70cc85bf5bf401cff' => __DIR__ . '/../..' . '/app/Http/Helpers/graphsHelper.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -458,6 +459,7 @@ class ComposerStaticInitddd774815002e3c245319695a06541b2
         'App\\Http\\Controllers\\Portal\\OgsController' => __DIR__ . '/../..' . '/app/Http/Controllers/Portal/OgsController.php',
         'App\\Http\\Controllers\\Portal\\PfsController' => __DIR__ . '/../..' . '/app/Http/Controllers/Portal/PfsController.php',
         'App\\Http\\Controllers\\Portal\\PortalController' => __DIR__ . '/../..' . '/app/Http/Controllers/Portal/PortalController.php',
+        'App\\Http\\Controllers\\Portal\\SearchController' => __DIR__ . '/../..' . '/app/Http/Controllers/Portal/SearchController.php',
         'App\\Http\\Controllers\\Portal\\TelController' => __DIR__ . '/../..' . '/app/Http/Controllers/Portal/TelController.php',
         'App\\Http\\Controllers\\Portal\\UsefulLinksController' => __DIR__ . '/../..' . '/app/Http/Controllers/Portal/UsefulLinksController.php',
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',

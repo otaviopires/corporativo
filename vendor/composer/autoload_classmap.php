@@ -24,6 +24,7 @@ return array(
     'App\\Http\\Controllers\\Portal\\OgsController' => $baseDir . '/app/Http/Controllers/Portal/OgsController.php',
     'App\\Http\\Controllers\\Portal\\PfsController' => $baseDir . '/app/Http/Controllers/Portal/PfsController.php',
     'App\\Http\\Controllers\\Portal\\PortalController' => $baseDir . '/app/Http/Controllers/Portal/PortalController.php',
+    'App\\Http\\Controllers\\Portal\\SearchController' => $baseDir . '/app/Http/Controllers/Portal/SearchController.php',
     'App\\Http\\Controllers\\Portal\\TelController' => $baseDir . '/app/Http/Controllers/Portal/TelController.php',
     'App\\Http\\Controllers\\Portal\\UsefulLinksController' => $baseDir . '/app/Http/Controllers/Portal/UsefulLinksController.php',
     'App\\Http\\Kernel' => $baseDir . '/app/Http/Kernel.php',
