@@ -165,12 +165,7 @@ return [
             ],
 			'can' => 'admin'
 		], */
-		
-		[
-            'text' => 'Escalas de Plantões',
-            'icon' => 'calendar',
-            'url' => '/events',
-        ],
+
         
        /** [
             'text' => 'Fórum',
@@ -178,12 +173,6 @@ return [
             'url' => '/forums',
         ],*/
 
-        [
-            'text' => 'FAQ\'s',
-            'icon' => 'book',
-            'url' => '/faq',
-
-        ],
 
        /** [
             'text'    => 'Help',
@@ -204,11 +193,7 @@ return [
             ],
     ],*/
 
-        [
-            'text' => 'Link\'s Utéis',
-            'icon' => 'angellist',
-            'url' => '/links',
-        ],
+
         [
             'text'    => 'OG\'s',
             'icon'    => 'bullhorn',
@@ -237,6 +222,25 @@ return [
                     'url'     => '/pfs/list',
                 ]
             ],
+        ],
+		
+		[
+            'text' => 'Escalas de Plantões',
+            'icon' => 'calendar',
+            'url' => '/events',
+        ],
+
+        [
+            'text' => 'FAQ',
+            'icon' => 'book',
+            'url' => '/faq',
+
+        ],
+
+        [
+            'text' => 'Link\'s Utéis',
+            'icon' => 'angellist',
+            'url' => '/links',
         ],
 
         [
