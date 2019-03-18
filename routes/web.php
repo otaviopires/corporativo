@@ -24,21 +24,30 @@ Route::group(['namespace' => 'Portal',  'middleware' => 'auth'], function () {
 	//PORTAL
 	Route::redirect('/', '/home', 301);
 	// Route::get('/home', 'PortalController@index')->name('home');
-	Route::get('/home', 'OgsController@retunDataToHomeChart')->name('home');
+	Route::get('/home', 'GraphsController@retunDataToHomeChart')->name('home');
 
 	
 
 	//OGS
 	Route::get('ogs/closed', 'OgsController@showClosedOgs');
-	
+	Route::get('ogs/open', 'OgsController@showOpenOgs');
+
 	//PFS
 	Route::get('pfs/list', 'PfsController@showClosedPfs');
 	
 
 	//SEARCH
-	Route::post('ogs/closed/find', 'SearchController@searchOg');
-	Route::get('ogs/closed/find', 'SearchController@searchOg');
+	Route::post('ogs/find', 'SearchController@searchOg');
+	Route::get('ogs/find', 'SearchController@searchOg');
+	Route::post('ogs/find/open', 'SearchController@searchOpenOg');
+	Route::get('ogs/find/open', 'SearchController@searchOpenOg');
+	
 	Route::post('/pfs/list/find', 'SearchController@searchPf');
+	Route::get('/pfs/list/find', 'SearchController@searchPf');
+	Route::post('/pfs/list/find/open', 'SearchController@searchOpenPf');
+	Route::get('/pfs/list/find/open', 'SearchController@searchOpenPf');
+	
+
 	Route::post('/links/find', 'SearchController@searchLink');
 	
 	

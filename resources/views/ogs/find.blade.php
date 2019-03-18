@@ -1,17 +1,16 @@
 @extends('adminlte::page')
 
 @section('content_header')
-	<h1>Histórico de OGs Encerradas</h1>
+	<h1>OGs encontradas ({{$total}}):</h1>
 	<ol class="breadcrumb">
 			<li><a href="{{route('home')}}"><i class="fa fa-home"></i> Home</a></li>
 			<li class="active">OG's</li>
-			<li class="active">Fechadas</li>
+			<li class="active">Resultado da pesquisa</li>
 	</ol>
 @stop
 
 
 @section('content')
-	
 
 	<form action="/ogs/find" method="POST" role="search">
 		{{ csrf_field() }}
@@ -24,9 +23,6 @@
 			</span>
 		</div>
 	</form>
-
-
-
 
 	<table class="table table-hover table-bordered">
 		<thead>
@@ -91,6 +87,8 @@
 		</tbody>
 	@endforeach
 	</table>
-    {{$ogs->links()}}	
+	@if( $ogs instanceof \Illuminate\Pagination\AbstractPaginator)
+		{{ $ogs->links() }}
+ 	@endif
 	{{-- <META HTTP-EQUIV=Refresh CONTENT="100; URL=http://10.13.65.95/ogs/closed"> --}}
 @endsection

@@ -1,7 +1,27 @@
 @extends('adminlte::page')
 
+
+@section('content_header')
+	<h1>Falhas em Andamento</h1>
+	<ol class="breadcrumb">
+			<li><a href="{{route('home')}}"><i class="fa fa-home"></i> Home</a></li>
+			<li class="active">OG's</li>
+			<li class="active">Em andamento</li>
+	</ol>
+@stop
+
 @section('content')
-	<h1 align="center">Falhas em Andamento</h1>
+	<form action="/ogs/find/open" method="POST" role="search">
+		{{ csrf_field() }}
+		<div class="input-group">
+			<input type="text" class="form-control" name="q"
+				placeholder="Pequise..."> <span class="input-group-btn">
+				<button type="submit" class="btn btn-default">
+					<span class="glyphicon glyphicon-search"></span>
+				</button>
+			</span>
+		</div>
+	</form>
 	
 	<table class="table table-hover table-bordered">
 		<thead>

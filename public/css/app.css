@@ -346,7 +346,7 @@
   .grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-    grid-template-rows: repeat(100, 300px);
+    grid-template-rows: repeat(3, 270px);
   }
 
   .item {
@@ -354,3 +354,18 @@
     align-items: center;
     justify-content: center;
   }
+
+
+
+  body > div.wrapper > div > section.content-header > div.painel-body > form > div > div.col-xs-1.col-sm-1.col-md-1.text-center {
+    align-items:center;
+    vertical-align: middle;
+    align-content: center;
+    padding: 24px 0 0;
+  }
+
+
+  body > div.wrapper > div > section.content-header > div.painel-body > form > div > div.col-xs-1.col-sm-1.col-md-1.text-center > input{
+    position: relative;
+    height: 35px;
+}

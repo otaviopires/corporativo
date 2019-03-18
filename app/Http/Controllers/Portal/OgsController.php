@@ -15,11 +15,6 @@ class OgsController extends Controller
        $this->middleware('auth')->except('logout');
     }
     
-	/**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {	
 		//$this->store();
@@ -27,22 +22,6 @@ class OgsController extends Controller
 		//return $this->showOpenOgs();
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-		// cron every minute
-	}
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store()
     {	
 		$ogs = $this->getOgsFromUrl();
@@ -66,17 +45,6 @@ class OgsController extends Controller
 				$ogToSave->localidade = $og['LOCALIDADE'];
 				$ogToSave->tecnico = $og['TECNICO'];
 				$ogToSave->descricao = $og['DESC_EQPTO'];
-				
-				// if($og['INTERROMPEU'] == "Y"){
-				// 	$ogToSave->interrompeu = "Sim";
-				// }elseif($og['INTERROMPEU'] == "N"){
-				// 	$ogToSave->interrompeu = "Não";
-				// }else{
-				// $ogToSave->interrompeu = "Não informado";
-				// }
-				
-				// $ogToSave->qtd_clientes = $og['QNT_CLIENTE'];
-				// $ogToSave->obs = $og['OBS'];
 				$ogToSave->save();
 				error_log("[NEW] - Protocolo " . Og::where('protocolo',  $og['PROTOCOLO'])->first()['protocolo'] . " salvo com sucesso!");
 			}
@@ -84,56 +52,9 @@ class OgsController extends Controller
 		$this->closeSavedOgs();
 	}
 	
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Og  $og
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Og $og)
-    {
-		// there's no specific view for a single Pf
-	}    
-	
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Og  $og
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Og $og)
-    {
-        // there's no editing of OGs here
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Og  $og
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Og $og)
-    {
-        // we don't update saved OGs, they're static
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Og  $og
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Og $og)
-    {
-        // we don't plan do delete save OGs, they're meant to be a log
-    }
-	
 	public function showOpenOgs()
     {
-        $ogs =  Og::orderBy('protocolo', 'desc');
+        $ogs =  Og::orderBy('protocolo', 'desc')->get();
 		foreach($ogs as $i=>$og){
 			if($og['status'] == "FECHADO"){
 				$ogs->forget($i);
@@ -186,78 +107,4 @@ class OgsController extends Controller
 			}		
 		}
 	}
-	
-	public function retunDataToHomeChart()
-    {
-		$open = $this->returnCountedOpenOgs();
-		$closed = $this->retunCountedClosedOgs();
-		$openPfs = $this->returnCountedOpenPfs();
-		$closedPfs = $this->returnCountedClosedPfs();
-
-		return view('home', compact('open', 'closed', 'openPfs', 'closedPfs'));	
-	}
-
-	protected function returnCountedOpenOgs(){
-		$regionais = [];
-		$ogs = $this->getOgsFromUrl();
-
-		foreach($ogs as $i=>$og){
-			$regionais[$i] = $og['REGIONAL'];
-		}
-
-		return array_count_values($regionais);
-	}
-
-	protected function retunCountedClosedOgs()
-    {
-		$regionais = [];
-		$ogs =  Og::orderBy('protocolo', 'desc')->get();
-		foreach($ogs as $i=>$og){
-			if($og['status'] == "ABERTO"){
-				$ogs->forget($i);
-			}
-		}
-
-		foreach($ogs as $i=>$og){
-			$regionais[$i] = $og['regional'];
-		}
-
-		return array_count_values($regionais);
-	}
-
-	protected function returnCountedOpenPfs()
-    {
-		$regionais = [];
-		$pfs =  Pf::orderBy('protocolo', 'desc')->get();
-		foreach($pfs as $i=>$pf){
-			if($pf['status'] == "FECHADO"){
-				$pfs->forget($i);
-			}
-		}
-
-		foreach($pfs as $i=>$pf){
-			$regionais[$i] = $pf['regional'];
-		}
-
-		return array_count_values($regionais);
-	}	
-
-	
-	protected function returnCountedClosedPfs()
-    {
-		$regionais = [];
-		$pfs =  Pf::orderBy('protocolo', 'desc')->get();
-		foreach($pfs as $i=>$pf){
-			if($pf['status'] == "ABERTO"){
-				$pfs->forget($i);
-			}
-		}
-
-		foreach($pfs as $i=>$pf){
-			$regionais[$i] = $pf['regional'];
-		}
-
-		return array_count_values($regionais);
-	}	
-
 }

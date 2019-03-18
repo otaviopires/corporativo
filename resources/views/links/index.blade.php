@@ -1,8 +1,15 @@
 @extends('adminlte::page')
 
+@section('content_header')
+	<h1 class="py-2">Links úteis</h1>
+	<ol class="breadcrumb">
+		<li><a href="{{route('home')}}"><i class="fa fa-home"></i> Home</a></li>
+		<li class="active">Links Utéis</li>
+	</ol>
+@stop
+
 @section('content')
 
-	<h1 class="py-2">Links úteis</h1>
 
 	<form action="/links/find" method="POST" role="search">
 		{{ csrf_field() }}
@@ -54,4 +61,5 @@
 			</div>
 		</div>
 	@endforeach
+
 @endsection

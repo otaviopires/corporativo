@@ -30,7 +30,7 @@
 </head>
 <body class="hold-transition @yield('body_class')">
     <div id="loading">
-        <img id="imagemLoader" alt="Processando"  src="http://dev.cadastro/vendor/adminlte/img/loading.gif" />
+        <img id="imagemLoader" alt="Processando"  src="{{ asset('vendor/adminlte/img/loading.gif') }}" />
     </div>
 @yield('body')
 

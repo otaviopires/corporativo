@@ -3,10 +3,10 @@
 @section('title', 'Portal Corporativo - Faq')
 
 @section('content_header')
-<h1>Faq's</h1>
+<h1>FAQ</h1>
 <ol class="breadcrumb">
     <li><a href="{{route('home')}}"><i class="fa fa-home"></i> Home</a></li>
-    <li class="active">Faq's</li>
+    <li class="active">FAQ</li>
     <li><button class="btn btn-primary btn-xs" type="button" data-toggle="modal" data-target="#modalfaq"><i class="fa fa-plus fa-fw"></i> Add Pergunta</button></li>
 </ol>
 @stop

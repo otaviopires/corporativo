@@ -8,7 +8,6 @@
 <ol class="breadcrumb">
     <li><a href="{{route('home')}}"><i class="fa fa-home"></i> Home</a></li>
     <li class="active">Telefones Utéis</li>
-    <!--<li><button class="btn btn-primary btn-xs" type="button" data-toggle="modal" data-target="#modalfaq"><i class="fa fa-plus fa-fw"></i> Add Contato</button></li>-->
 </ol>
 @stop
 

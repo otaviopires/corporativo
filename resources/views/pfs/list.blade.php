@@ -1,8 +1,15 @@
 @extends('adminlte::page')
 
-@section('content')
-	<h1 align="center">Histórico de PFs</h1>
-	
+@section('content_header')
+	<h1>Pesquisas de Falha Fechadas</h1>
+	<ol class="breadcrumb">
+			<li><a href="{{route('home')}}"><i class="fa fa-home"></i> Home</a></li>
+			<li class="active">Pesquisa de Falha</li>
+			<li class="active">Fechadas</li>
+	</ol>
+@stop
+
+@section('content')	
 	<form action="/pfs/list/find" method="POST" role="search">
 		{{ csrf_field() }}
 		<div class="input-group">
@@ -65,6 +72,8 @@
 		</tbody>
 	@endforeach
 	</table>
-    {{$pfs->links()}}
+		@if($pfs instanceof \Illuminate\Pagination\AbstractPaginator)
+   		{{$pfs->links()}}
+		@endif
 {{-- <META HTTP-EQUIV=Refresh CONTENT="100; URL=http://10.13.65.95/pfs/list">	 --}}
 @endsection
