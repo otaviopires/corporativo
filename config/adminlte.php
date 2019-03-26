@@ -210,7 +210,7 @@ return [
             ],
         ],
         [
-            'text'    => 'Pesquisa de Falha',
+            'text'    => 'Pesquisas de Falhas',
             'icon'    => 'search',
             'submenu' => [
                 [
@@ -223,7 +223,30 @@ return [
                 ]
             ],
         ],
-		
+
+        [
+            'text' => 'First Call Resolution',
+            'icon' => 'info-circle',
+            'submenu' => [
+                [
+                    'text' => 'Internet Link',
+                    'url' => '/fcr/link',
+                ],
+                [
+                    'text' => 'VPN',
+                    'url' => '/fcr/vpn',
+                ],
+                [
+                    'text' => 'Clear Channel',
+                    'url' => '/fcr/clear',
+                ],
+                [
+                    'text' => 'Senhas',
+                    'url' => '/fcr/senhas',
+                ],
+            ],
+        ],
+
 		[
             'text' => 'Escalas de Plantões',
             'icon' => 'calendar',
@@ -231,10 +254,9 @@ return [
         ],
 
         [
-            'text' => 'FAQ',
-            'icon' => 'book',
-            'url' => '/faq',
-
+            'text' => 'Telefones Utéis',
+            'icon' => 'angellist',
+            'url' => '/tel',
         ],
 
         [
@@ -244,9 +266,10 @@ return [
         ],
 
         [
-            'text' => 'Telefones Utéis',
-            'icon' => 'angellist',
-            'url' => '/tel',
+            'text' => 'FAQ',
+            'icon' => 'book',
+            'url' => '/faq',
+
         ],
 
         [

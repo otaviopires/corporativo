@@ -26,6 +26,7 @@ Route::group(['namespace' => 'Portal',  'middleware' => 'auth'], function () {
 	// Route::get('/home', 'PortalController@index')->name('home');
 	Route::get('/home', 'GraphsController@retunDataToHomeChart')->name('home');
 
+
 	
 
 	//OGS
@@ -35,6 +36,11 @@ Route::group(['namespace' => 'Portal',  'middleware' => 'auth'], function () {
 	//PFS
 	Route::get('pfs/list', 'PfsController@showClosedPfs');
 	
+	//FCR
+	Route::view('fcr/link', 'portal.fcr.link');
+	Route::view('fcr/vpn', 'portal.fcr.vpn');
+	Route::view('fcr/clear', 'portal.fcr.clear');
+	Route::view('fcr/senhas', 'portal.fcr.senhas');
 
 	//SEARCH
 	Route::post('ogs/find', 'SearchController@searchOg');

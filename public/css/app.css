@@ -369,3 +369,23 @@
     position: relative;
     height: 35px;
 }
+
+code{
+  margin:0!important ; 
+  padding:0!important;
+  
+  /* color: rgb(224, 224, 224) !important;
+  background:  rgb(33, 67, 95) !important; */
+}
+
+body > div.wrapper > div > section.content > h4 > strong > a { 
+  color: #333 !important;
+}
+body > div.wrapper > div > section.content > h4 > a > i {
+  color: #333 !important;
+}
+
+#collapse2 > code > span {
+  background: #ecf0f5 !important;
+  color: #333 !important;
+}
